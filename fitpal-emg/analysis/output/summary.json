@@ -1,0 +1,25 @@
+{
+  "parity": {
+    "max_abs_env_diff_mV": 0.007584371073792617,
+    "py_reps": 10,
+    "cpp_reps": 10,
+    "same_effective_flags": true
+  },
+  "fitpal": {
+    "tp": 480,
+    "fp": 5,
+    "fn": 0,
+    "precision": 0.99,
+    "recall": 1.0,
+    "f1": 0.995
+  },
+  "fixed_threshold": {
+    "tp": 227,
+    "fp": 100,
+    "fn": 253,
+    "precision": 0.694,
+    "recall": 0.473,
+    "f1": 0.563
+  },
+  "sessions": 60
+}

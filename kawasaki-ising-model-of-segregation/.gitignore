@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.DS_Store
+
+# local CLI output
+/results/summary.json
+
+# LaTeX build files
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.blg
+paper/*.bbl

@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or the accompanying paper, please cite it as below."
+type: software
+title: "Kawasaki-Ising Model of Segregation"
+version: 2.0.0
+date-released: 2026-10-07
+license: MIT
+authors:
+  - family-names: Castaño
+    given-names: Juan Fernando
+    email: jfc9577@nyu.edu
+    affiliation: New York University
+abstract: >-
+  Pair-exchange Metropolis sampling for the two-dimensional Ising lattice gas at fixed composition,
+  with exact finite-state checks of the sampler and a replicated comparison of the energy-variance
+  peak with the exact coexistence curve.
+keywords:
+  - Ising model
+  - Kawasaki dynamics
+  - Monte Carlo
+  - phase coexistence
+  - segregation

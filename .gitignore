@@ -1,0 +1,17 @@
+secrets.h
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+analysis/output/*.csv
+__pycache__/
+analysis/output/test_pipeline
+.DS_Store
+*.bbl
+*.blg
+*.HEIC
+IMG_*.JPG
+ELE_*.jpg
+*.mp4
+EXECUTIVE_AUDIT.md

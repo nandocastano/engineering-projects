@@ -1,0 +1,5 @@
+Concentric Heat Exchanger Modelling in COMSOL
+
+We built conjugate heat-transfer models of a concentric (tube-in-tube) water heat exchanger in COMSOL Multiphysics, first as an isothermal MEMS-scale study and then at laboratory scale (1 m) in 3D and 2D. The central question was how fine a mesh is actually needed. We compared four predefined tetrahedral meshes in 3D and five structurally different 2D meshes (free triangular, mapped rectangular, free quadrilateral) over three inlet-temperature cases. In 3D, the Fine and Extra fine meshes converge to the same profile while coarser ones over-predict outlet temperature. In 2D, an extremely coarse unstructured triangular mesh matches the reference with roughly half the elements (47,210 vs 86,520), and a mapped mesh with the most elements (108,000) gave a physically implausible profile. The selected mesh was compared with measurements from a bench-top shell-and-tube unit; agreement is qualitative (hot-channel outlet only). A solver discrepancy on one 3D mesh is documented and was not resolved.
+
+Authors: Orsi Nagy, Juan Fernando Castaño. Thermal Systems, NYU Abu Dhabi.

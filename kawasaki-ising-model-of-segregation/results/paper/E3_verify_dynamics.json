@@ -1,0 +1,179 @@
+{
+ "equivalence": [
+  {
+   "n": 16,
+   "T": 1.0,
+   "f": 0.2,
+   "package==fixed_variant": true,
+   "package==counted": true
+  },
+  {
+   "n": 32,
+   "T": 2.27,
+   "f": 0.4,
+   "package==fixed_variant": true,
+   "package==counted": true
+  },
+  {
+   "n": 50,
+   "T": 3.0,
+   "f": 0.5,
+   "package==fixed_variant": true,
+   "package==counted": true
+  }
+ ],
+ "adjacency": [
+  {
+   "n": 20,
+   "T": 1.0,
+   "f": 0.2,
+   "proposals": 120000,
+   "adjacent_rate": 0.009983333333333334,
+   "theory_4_over_n2": 0.01,
+   "differing_rate": 0.31824166666666664,
+   "adjacent_among_differing": 0.0017282463536620492,
+   "accepted_adjacent_fraction_of_accepted": 0.019011406844106463,
+   "acceptance_rate_among_differing": 0.006886799863835136
+  },
+  {
+   "n": 20,
+   "T": 2.269,
+   "f": 0.2,
+   "proposals": 120000,
+   "adjacent_rate": 0.009583333333333333,
+   "theory_4_over_n2": 0.01,
+   "differing_rate": 0.3192833333333333,
+   "adjacent_among_differing": 0.005794226653442606,
+   "accepted_adjacent_fraction_of_accepted": 0.012193664076509264,
+   "acceptance_rate_among_differing": 0.21832750430651982
+  },
+  {
+   "n": 20,
+   "T": 3.0,
+   "f": 0.2,
+   "proposals": 120000,
+   "adjacent_rate": 0.009908333333333333,
+   "theory_4_over_n2": 0.01,
+   "differing_rate": 0.320775,
+   "adjacent_among_differing": 0.006806432338347232,
+   "accepted_adjacent_fraction_of_accepted": 0.008729510770583433,
+   "acceptance_rate_among_differing": 0.41365962642558385
+  },
+  {
+   "n": 40,
+   "T": 1.0,
+   "f": 0.2,
+   "proposals": 480000,
+   "adjacent_rate": 0.0025270833333333334,
+   "theory_4_over_n2": 0.0025,
+   "differing_rate": 0.3218,
+   "adjacent_among_differing": 0.00042728402734617773,
+   "accepted_adjacent_fraction_of_accepted": 0.0036319612590799033,
+   "acceptance_rate_among_differing": 0.005347524342241558
+  },
+  {
+   "n": 40,
+   "T": 2.269,
+   "f": 0.2,
+   "proposals": 480000,
+   "adjacent_rate": 0.002616666666666667,
+   "theory_4_over_n2": 0.0025,
+   "differing_rate": 0.3207541666666667,
+   "adjacent_among_differing": 0.0011886049804497214,
+   "accepted_adjacent_fraction_of_accepted": 0.002948864017157027,
+   "acceptance_rate_among_differing": 0.1938270482326808
+  },
+  {
+   "n": 40,
+   "T": 3.0,
+   "f": 0.2,
+   "proposals": 480000,
+   "adjacent_rate": 0.0025729166666666665,
+   "theory_4_over_n2": 0.0025,
+   "differing_rate": 0.31971875,
+   "adjacent_among_differing": 0.001811487961424429,
+   "accepted_adjacent_fraction_of_accepted": 0.0025017281674841172,
+   "acceptance_rate_among_differing": 0.3959078617274297
+  },
+  {
+   "n": 100,
+   "T": 1.0,
+   "f": 0.2,
+   "proposals": 3000000,
+   "adjacent_rate": 0.000397,
+   "theory_4_over_n2": 0.0004,
+   "differing_rate": 0.319987,
+   "adjacent_among_differing": 3.958494147158062e-05,
+   "accepted_adjacent_fraction_of_accepted": 0.00040816326530612246,
+   "acceptance_rate_among_differing": 0.005104374031861711
+  },
+  {
+   "n": 100,
+   "T": 2.269,
+   "f": 0.2,
+   "proposals": 3000000,
+   "adjacent_rate": 0.00042566666666666664,
+   "theory_4_over_n2": 0.0004,
+   "differing_rate": 0.32043866666666665,
+   "adjacent_among_differing": 0.00019452500530522742,
+   "accepted_adjacent_fraction_of_accepted": 0.00043777431050546096,
+   "acceptance_rate_among_differing": 0.1853438411510887
+  },
+  {
+   "n": 100,
+   "T": 3.0,
+   "f": 0.2,
+   "proposals": 3000000,
+   "adjacent_rate": 0.00039966666666666666,
+   "theory_4_over_n2": 0.0004,
+   "differing_rate": 0.320031,
+   "adjacent_among_differing": 0.0002728902304255942,
+   "accepted_adjacent_fraction_of_accepted": 0.0003389115867733749,
+   "acceptance_rate_among_differing": 0.39030489754638353
+  }
+ ],
+ "seeding": {
+  "bare": {
+   "first_run_hash_in_6_fresh_processes": [
+    "9d7e5e67a696",
+    "f21a30b7e49a",
+    "79ef5750edda",
+    "a90687a7ac92",
+    "34503615f36d",
+    "cae2b6549358"
+   ],
+   "distinct_across_processes": 6,
+   "4_repeated_seeded_runs_in_one_process": [
+    "82840c85a801",
+    "63ac7d0f4c18",
+    "e4de08039e59",
+    "2b88f072d230"
+   ],
+   "distinct_within_process": 4
+  },
+  "seed_all": {
+   "first_run_hash_in_6_fresh_processes": [
+    "77d00a7a2ed1",
+    "77d00a7a2ed1",
+    "77d00a7a2ed1",
+    "77d00a7a2ed1",
+    "77d00a7a2ed1",
+    "77d00a7a2ed1"
+   ],
+   "distinct_across_processes": 1,
+   "4_repeated_seeded_runs_in_one_process": [
+    "77d00a7a2ed1",
+    "77d00a7a2ed1",
+    "77d00a7a2ed1",
+    "77d00a7a2ed1"
+   ],
+   "distinct_within_process": 1
+  }
+ },
+ "speed": {
+  "n": 100,
+  "jit_sec_per_sweep": 0.000736150870000074,
+  "python_sec_per_sweep": 0.10597889360001318,
+  "speedup": 143.96355138451787
+ }
+}

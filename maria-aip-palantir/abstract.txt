@@ -1,0 +1,5 @@
+María: Farm Logistics on Palantir Foundry and AIP
+
+María applies Palantir Foundry and the Artificial Intelligence Platform (AIP) to the logistics of running a farm. Farm data, including sensor time series, is modelled as an ontology of objects and relationships. AIP then runs a language model on that structured model to triage what needs attention first and to draft a protocol for each item, referenced to FAO guidance. The aim is that every recommendation can be traced to data and to published guidance instead of to free-form text. Built for the Palantir Build Challenge; a recorded walkthrough is at https://youtu.be/ssvYMJInNas. The report describes the design and gives no performance figures, because none were measured.
+
+Juan Fernando Castaño and team.

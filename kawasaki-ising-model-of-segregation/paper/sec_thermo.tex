@@ -1,0 +1,28 @@
+\section{The Thermodynamic Reference and the Variance-Peak Estimator}
+\label{sec:thermo}
+
+\subsection{Exact coexistence curve of the fixed-composition model}
+Under $n_x=(1+\sigma_x)/2$ the model is the square-lattice gas of immigrants at density $f$ with nearest-neighbour attraction, and the magnetisation per site is deterministic on $\Omega_{N,M}$: $m=2f-1$. The critical temperature is $\Tc=2J/\ln(1+\sqrt2)\approx 2.2692\,J$ \citep{onsager1944}, and the bulk spontaneous magnetisation for $T<\Tc$ is
+\begin{equation}
+m_{\mathrm s}(T)=\big[1-\sinh^{-4}(2J/T)\big]^{1/8}
+\label{eq:yang}
+\end{equation}
+\citep{yang1952}, which decreases strictly from $1$ at $T=0$ to $0$ at $T=\Tc$.
+\begin{definition}[Binodal]\label{def:binodal}
+For $f\in(0,1)$ let $\Tb(f)\in(0,\Tc]$ be the unique solution of $m_{\mathrm s}(\Tb)=|2f-1|$ (and $\Tb(1/2)=\Tc$).
+\end{definition}
+By construction $\Tb(f)=\Tb(1-f)$, $\Tb$ is maximal exactly at $f=1/2$, and $\Tb(f)\to0$ only as $f\to0$ or $1$. Below $\Tb(f)$ the thermodynamic equilibrium at fixed composition $f$ lies in the two-phase coexistence region, with phase magnetisations $\pm m_{\mathrm s}(T)$; above it, the equilibrium state is homogeneous \citep{rowlinson1982}. Inverting \eqref{eq:yang} gives the closed form $\Tb(f)=2J\big/\operatorname{arsinh}\!\big((1-m^{8})^{-1/4}\big)$ with $m=|2f-1|$, which tends to $\Tc$ as $m\to0$; the values relevant below are $\Tb(0.05)=\EbFiveHundredth$, $\Tb(0.10)=\EbTenth$, $\Tb(0.20)=\EbFifth$, $\Tb(0.30)=\EbThree$ and $\Tb(0.50)=\Tc=\EbHalf$ (all in units of $J$). The curve is flat over most of the composition range and falls appreciably only for $f\lesssim0.1$ or $f\gtrsim0.9$. Inside the flat range the exact curve leaves almost no composition dependence for a simulated estimate to resolve.
+
+\subsection{The variance-peak estimator}
+Given a temperature grid $\mathcal T$, burn-in $B$ sweeps and $S$ sampling sweeps, the estimator under study (the protocol of the accompanying software) runs one chain per $T\in\mathcal T$ from a uniformly random configuration of composition $f$, records $E_s=H(\sigma^{(s)})$ after each of the $S$ sampling sweeps and returns
+\begin{equation}
+\hat V(T)=\frac{1}{S}\sum_{s=1}^{S}\big(E_s-\bar E\big)^2,\qquad
+\hat T^{V}=\arg\max_{T\in\mathcal T}\hat V(T).
+\label{eq:estimator}
+\end{equation}
+We call $\hat T^{V}$ the variance-peak estimate; it is often reported as a ``critical'' or ``demixing'' temperature. In the canonical ensemble $\Var(E)=N^2T^2\,c_v$ with $c_v$ the specific heat per site, so the maximiser of $c_v$ is $\hat T^{C}=\arg\max_T \hat V(T)/(N^2T^2)$. The factor $T^{-2}$ moves the maximiser, so we report both. With $R$ independent replicates we use (i) the \emph{single-run} estimator, the distribution of $\hat T^{V}$ over replicates, summarised by its mean and standard deviation; and (ii) the maximiser $\bar T^{V}$ of the replicate-mean curve $\bar V(T)=R^{-1}\sum_r\hat V_r(T)$, with a nonparametric bootstrap over replicates \citep{efron1979} ($4000$ resamples, percentile interval).
+
+\subsection{What a variance peak can be expected to locate}
+At $f=1/2$ the criticality at $\Tc$ produces a divergence of the specific heat in the thermodynamic limit \citep{onsager1944}, rounded at finite $N$. At $f\ne1/2$ the thermodynamic limit does not produce a divergence at $\Tb(f)$: by the lever rule the energy at fixed composition is continuous across the boundary of the two-phase region while its temperature derivative generally changes by a finite amount, so one expects a finite jump of $c_v$, not a singular peak (a standard thermodynamic argument that we do not prove here). In a finite system at fixed composition the passage from a homogeneous state to coexistence is rounded and occurs through the formation of a droplet whose onset is displaced from the thermodynamic boundary by finite-size effects \citep{binder1987,biskup2002}. Whether $\hat T^V$ or $\bar T^V$ tracks $\Tb(f)$ is therefore an empirical, size-dependent question, and that is how we treat it.
+
+We fixed the criterion before running the replicated experiments. The estimate at $(N,f)$ is \emph{consistent with the binodal} if the $95\%$ bootstrap interval of $\bar T^{V}$ contains $\Tb(f)$; the single-run estimator is judged by its mean bias $\E[\hat T^V]-\Tb(f)$ against its standard deviation and the grid step $\Delta T=\EfiveGridStep$.

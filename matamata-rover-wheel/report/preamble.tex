@@ -1,0 +1,56 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[letterpaper,left=1.25in,right=1.25in,top=1.2in,bottom=1.2in,headheight=14pt]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{graphicx,booktabs,array,multirow,float}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[labelfont=bf,labelsep=colon,font=small,skip=4pt]{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage[authoryear,round]{natbib}
+\definecolor{linkcol}{HTML}{2B3A8F}
+\usepackage[colorlinks=true,linkcolor=linkcol,citecolor=linkcol,urlcolor=linkcol]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small Technical report.}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\parskip}{4pt plus 1pt}\setlength{\parindent}{0pt}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{\thesubsubsection}{0.8em}{}
+\titlespacing*{\section}{0pt}{16pt}{6pt}\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+\setlist{itemsep=1pt,topsep=3pt}
+\setlength{\emergencystretch}{2em}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,framerule=0.3pt,
+  xleftmargin=4pt,xrightmargin=4pt,columns=fullflexible,keepspaces=true,showstringspaces=false}
+
+% title block: \reporttitle{title}{subtitle}{authors}{affiliation line}
+\newcommand{\reporttitle}[4]{%
+\begin{center}
+{\LARGE\bfseries #1\\[4pt]
+\Large #2\par}
+\vspace{1.4em}
+{\bfseries\color{linkcol}\large #3}\\[0.4em]
+{\small #4}\par
+\vspace{1.2em}
+\end{center}}
+\newcommand{\abstractblock}[1]{%
+\begin{center}\textbf{Abstract}\end{center}
+\vspace{-0.4em}
+\begin{quote}\small #1\end{quote}
+\vspace{0.4em}}

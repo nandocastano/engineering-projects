@@ -1,0 +1,36 @@
+{
+ "L": 6,
+ "displacements": 35,
+ "configs": 13824,
+ "adjacent_configs": 512,
+ "nonadjacent_configs": 13312,
+ "fixed_mismatch": 0,
+ "pairsum_mismatch_nonadj": 0,
+ "pairsum_err_adj_values": [
+  -4.0
+ ],
+ "pairsum_err_nonadj_values": [
+  0.0
+ ],
+ "max_union": 10,
+ "true_dE_values_adj": [
+  -12.0,
+  -8.0,
+  -4.0,
+  0.0,
+  4.0,
+  8.0,
+  12.0
+ ],
+ "true_dE_values_nonadj": [
+  -16.0,
+  -12.0,
+  -8.0,
+  -4.0,
+  0.0,
+  4.0,
+  8.0,
+  12.0,
+  16.0
+ ]
+}

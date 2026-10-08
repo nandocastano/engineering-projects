@@ -1,0 +1,56 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[letterpaper,left=1.25in,right=1.25in,top=1.2in,bottom=1.2in,headheight=14pt]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{graphicx,booktabs,array,multirow}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[labelfont=bf,labelsep=colon,font=small,skip=4pt]{caption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[authoryear,round]{natbib}
+\definecolor{linkcol}{HTML}{2B3A8F}
+\usepackage[colorlinks=true,linkcolor=linkcol,citecolor=linkcol,urlcolor=linkcol]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small Preprint.}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\parskip}{4pt plus 1pt}\setlength{\parindent}{0pt}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{\thesubsubsection}{0.8em}{}
+\titlespacing*{\section}{0pt}{16pt}{6pt}\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+\setlist{itemsep=1pt,topsep=3pt}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\crefname{proposition}{Proposition}{Propositions}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Lam}{\Lambda_N}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\unlike}{\mathcal{U}}
+\newcommand{\Tb}{T_{\mathrm b}}
+\newcommand{\Tc}{T_{\mathrm c}}
+\newcommand{\Hdel}{\Delta H}
+\newcommand{\Hpair}{\Delta H^{\mathrm{pair}}}
+\newcommand{\Ind}{\mathbf{1}}
+\input{generated/numbers.tex}
+
+\setlength{\emergencystretch}{2em}

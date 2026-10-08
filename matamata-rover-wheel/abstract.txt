@@ -1,0 +1,7 @@
+Matamata Rover Wheel: biomimetic planetary-rover wheel (25% scale prototype)
+
+The Matamata Rover Wheel is a design study for a planetary-rover wheel inspired by the polygonal shell of the matamata turtle (Chelus fimbriata). NASA Mars rover wheels have shown localized damage at the corners of their wave-shaped treads; this design replaces that pattern with a field of hexagonal scutes (4 cm per side at full scale) intended to spread contact stress more evenly. The core keeps a Perseverance-like architecture with added ribs, and the curved connector bars are replaced by thicker straight bars.
+
+A 25%-scale prototype was built to test manufacturability: a 3D-printed hexagonal tread, a laser-cut stacked core, and six connector bars cut as one circular frame. Three print iterations showed that 90-degree overhangs in the tread and inner rim fail on a desktop printer; 45-degree chamfers fixed this. Screws were not feasible at 25% scale, so the prototype is glued, while the full-scale design keeps screw/weld joints. Prototype cost was $64.50. Mechanical performance (traction, fatigue, load) has not been tested; the full-scale material selection (7075-T6 aluminium with a Nitinol coating, Ti-6Al-4V bars, 316 stainless pins) is a proposal.
+
+Author: Juan Fernando Castaño. NYU Abu Dhabi, ENGR-UH 2113, Spring 2025.

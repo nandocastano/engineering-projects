@@ -1,0 +1,111 @@
+\section{The Exchange Kernel: Exact Energetics and Detailed Balance}
+\label{sec:theory}
+This section settles the first question. We define the chain, derive the exact exchange energy, prove that the resulting kernel has the canonical law as its stationary distribution, and then ask what happens to the stationary law when the adjacency term is dropped.
+
+\subsection{The segregation Ising model}
+Let $N\ge 3$ and $\Lam=(\Z/N\Z)^2$ be the $N\times N$ discrete torus, with edge set $\mathcal E=\{\{x,x+e_1\},\{x,x+e_2\}:x\in\Lam\}$, so that $|\mathcal E|=2N^2$ and every site has exactly four distinct neighbours; we write $x\sim y$ if $\{x,y\}\in\mathcal E$. A \emph{configuration} is $\sigma\in\{-1,+1\}^{\Lam}$, where $\sigma_x=+1$ denotes an immigrant and $\sigma_x=-1$ a native. The energy is
+\begin{equation}
+H(\sigma)\;=\;-J\sum_{\{x,y\}\in\mathcal E}\sigma_x\sigma_y,\qquad J>0,
+\label{eq:H}
+\end{equation}
+and we set $k_{\mathrm B}=1$, so that $T$ is the ``social temperature''. The composition $M(\sigma)=|\{x:\sigma_x=+1\}|$ is conserved by exchange dynamics; we write $f=M/N^2$ and $\Omega_{N,M}=\{\sigma:M(\sigma)=M\}$, which has $\binom{N^2}{M}$ elements. The target is the canonical Gibbs law at fixed composition,
+\begin{equation}
+\pi_{\beta,M}(\sigma)\;=\;\frac{e^{-\beta H(\sigma)}}{Z_{N,M}(\beta)}\,\Ind[\sigma\in\Omega_{N,M}],\qquad \beta=1/T.
+\label{eq:gibbs}
+\end{equation}
+
+\subsection{The exchange Metropolis chain}
+For distinct sites $x\ne y$ let $\tau_{xy}\sigma$ denote $\sigma$ with the values at $x$ and $y$ exchanged. An exchange changes $\sigma$ only if the pair is \emph{unlike}, $\sigma_x\ne\sigma_y$; let $\unlike(\sigma)$ be the set of unlike unordered pairs. For $\{x,y\}\in\unlike(\sigma)$ write $\Hdel_{xy}(\sigma)=H(\tau_{xy}\sigma)-H(\sigma)$ and $a(u)=\min\{1,e^{-u}\}$.
+
+\begin{definition}[Pair-exchange Metropolis kernel]\label{def:kernel}
+Draw $x,y$ independently and uniformly from $\Lam$ and, if $\{x,y\}\in\unlike(\sigma)$, move to $\tau_{xy}\sigma$ with probability $a(\beta\,\Hdel_{xy}(\sigma))$; otherwise stay. Each unordered pair is proposed with probability $2/N^4$, hence for $\sigma'=\tau_{xy}\sigma\neq\sigma$,
+\begin{equation}
+P_\beta(\sigma,\sigma')=\frac{2}{N^4}\,a\!\big(\beta\,\Hdel_{xy}(\sigma)\big),\qquad
+P_\beta(\sigma,\sigma)=1-\sum_{\sigma'\ne\sigma}P_\beta(\sigma,\sigma').
+\label{eq:kernel}
+\end{equation}
+A \emph{sweep} is $N^2$ successive applications of $P_\beta$, i.e.\ the kernel $S_\beta=P_\beta^{N^2}$ (\cref{alg:sweep}).
+\end{definition}
+
+\begin{algorithm}[t]
+\caption{One Monte Carlo sweep of the exchange sampler (as implemented in \texttt{core.kawasaki\_step}).}\label{alg:sweep}
+\begin{algorithmic}[1]
+\For{$i=1,\dots,N^2$}
+  \State draw $x,y\in\Lam$ independently and uniformly
+  \If{$\sigma_x=\sigma_y$} \textbf{continue} \EndIf
+  \State $\Delta\gets \Hpair_{xy}(\sigma)+4J\cdot\Ind[x\sim y]$ \Comment{exact $\Hdel_{xy}$, \cref{prop:delta}}
+  \If{$\Delta\le 0$ \textbf{or} $U<e^{-\beta\Delta}$, $U\sim\mathrm{Unif}(0,1)$} \State $\sigma\gets\tau_{xy}\sigma$ \EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Exact exchange energy}
+For a site $x$ let $n_x=\sum_{z\sim x}\sigma_z$ be its full four-neighbour sum, and define the \emph{pair-sum} quantity
+\begin{equation}
+\Hpair_{xy}(\sigma)\;=\;2J\sigma_x n_x+2J\sigma_y n_y,
+\label{eq:pair}
+\end{equation}
+the sum of the two energy changes that flipping $x$ and $y$ \emph{independently} would incur.
+
+\begin{proposition}[Exact exchange energy]\label{prop:delta}
+Let $\{x,y\}\in\unlike(\sigma)$. Then
+\begin{equation}
+\Hdel_{xy}(\sigma)\;=\;\Hpair_{xy}(\sigma)+4J\,\Ind[x\sim y].
+\label{eq:delta}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Since $\sigma_y=-\sigma_x$, exchanging the two values is the same as flipping both spins. An edge $\{u,v\}$ whose energy term $-J\sigma_u\sigma_v$ changes must contain exactly one of $x,y$, because flipping both endpoints leaves $\sigma_u\sigma_v$ unchanged. If $x\sim y$ the edge $\{x,y\}$ therefore contributes $0$. Every edge $\{x,z\}$ with $z\ne y$ changes from $-J\sigma_x\sigma_z$ to $+J\sigma_x\sigma_z$, i.e.\ by $2J\sigma_x\sigma_z$, and likewise for $\{y,z\}$ with $z\neq x$. Hence
+\[
+\Hdel_{xy}=2J\sigma_x\!\!\sum_{z\sim x,\,z\ne y}\!\!\sigma_z+2J\sigma_y\!\!\sum_{z\sim y,\,z\ne x}\!\!\sigma_z .
+\]
+If $x\not\sim y$ the restrictions $z\ne y$, $z\ne x$ are vacuous and the right-hand side equals $\Hpair_{xy}$. If $x\sim y$, then $\sum_{z\sim x,z\ne y}\sigma_z=n_x-\sigma_y$ and $\sum_{z\sim y,z\ne x}\sigma_z=n_y-\sigma_x$, so $\Hdel_{xy}=\Hpair_{xy}-4J\sigma_x\sigma_y=\Hpair_{xy}+4J$, because $\sigma_x\sigma_y=-1$.
+\end{proof}
+
+\begin{corollary}[Attainable values]\label{cor:values}
+$\Hdel_{xy}(\sigma)\in 4J\,\Z$ always; moreover $|\Hdel_{xy}|\le 12J$ if $x\sim y$ and $|\Hdel_{xy}|\le 16J$ otherwise.
+\end{corollary}
+\begin{proof}
+If $x\not\sim y$, $\sigma_xn_x$ and $\sigma_yn_y$ are sums of four $\pm1$ terms, hence even integers in $[-4,4]$, and $\Hdel=2J(\sigma_xn_x+\sigma_yn_y)\in 4J\Z\cap[-16J,16J]$. If $x\sim y$, each of $u=\sigma_x\sum_{z\sim x,z\ne y}\sigma_z$ and $v=\sigma_y\sum_{z\sim y,z\ne x}\sigma_z$ is a sum of three $\pm1$ terms, hence odd in $[-3,3]$, and $\Hdel=2J(u+v)\in4J\Z\cap[-12J,12J]$.
+\end{proof}
+
+\subsection{Reversibility, ergodicity and stationarity}
+\begin{theorem}[Correct sampler]\label{thm:correct}
+For every $N\ge3$, $0<M<N^2$ and $\beta>0$, the kernel $P_\beta$ of \cref{def:kernel} is reversible with respect to $\pi_{\beta,M}$, irreducible and aperiodic on $\Omega_{N,M}$. Consequently $\pi_{\beta,M}$ is its unique stationary distribution, $\|P_\beta^t(\sigma_0,\cdot)-\pi_{\beta,M}\|_{\TV}\to0$ for every $\sigma_0\in\Omega_{N,M}$, and the same holds for the sweep kernel $S_\beta=P_\beta^{N^2}$.
+\end{theorem}
+\begin{proof}
+\emph{Reversibility.} Let $\sigma'=\tau_{xy}\sigma\ne\sigma$ and $\Delta=\Hdel_{xy}(\sigma)$. The pair $\{x,y\}$ is unlike in $\sigma'$ as well, and $\Hdel_{xy}(\sigma')=-\Delta$. By \eqref{eq:gibbs}, $\pi(\sigma)/\pi(\sigma')=e^{\beta\Delta}$, so detailed balance $\pi(\sigma)P(\sigma,\sigma')=\pi(\sigma')P(\sigma',\sigma)$ is equivalent to $e^{\beta\Delta}a(\beta\Delta)=a(-\beta\Delta)$, which holds because $e^{u}\min\{1,e^{-u}\}=\min\{e^{u},1\}$. Detailed balance implies that $\pi$ is stationary.
+\emph{Irreducibility.} Let $\sigma,\sigma'\in\Omega_{N,M}$ with immigrant sets $A,A'$ ($|A|=|A'|=M$). Then $|A\setminus A'|=|A'\setminus A|=:k$; pair the elements of $A\setminus A'$ with those of $A'\setminus A$ arbitrarily. Exchanging each pair is an unlike exchange that moves an immigrant to its target, so $\sigma'$ is reached after $k$ exchanges, each of which has positive probability since proposals have probability $2/N^4>0$ and $a(\cdot)>0$ for finite $\beta$.
+\emph{Aperiodicity.} Proposing $x=y$ (probability $N^{-2}$) leaves $\sigma$ unchanged, so $P(\sigma,\sigma)\ge N^{-2}>0$.
+The remaining statements follow from the convergence theorem for finite irreducible aperiodic chains \citep{levin2009}; $S_\beta=P_\beta^{N^2}$ is again irreducible and aperiodic with the same stationary law.
+\end{proof}
+
+\subsection{Dropping the adjacency term}
+The pair-sum \eqref{eq:pair} is the exact energy change whenever the two sites are not neighbours, so it is a natural shortcut. Let $\tilde P_\beta$ denote the kernel that uses it: it is \eqref{eq:kernel} with $a(\beta\,\Hdel_{xy})$ replaced by $a(\beta\,\Hpair_{xy})$, i.e.\ by $a(\beta[\Hdel_{xy}-4J\Ind[x\sim y]])$ by \cref{prop:delta}. By construction $\tilde P_\beta$ and $P_\beta$ differ only on exchanges of \emph{adjacent} unlike pairs.
+
+\begin{proposition}[Detailed balance fails]\label{prop:flux}
+Let $\sigma'=\tau_{xy}\sigma\ne\sigma$ with $x\sim y$, and write $\Hdel_{xy}(\sigma)=4Jk$, $k\in\Z$ (\cref{cor:values}). Then
+\begin{equation}
+\frac{\pi_{\beta,M}(\sigma)\,\tilde P_\beta(\sigma,\sigma')}{\pi_{\beta,M}(\sigma')\,\tilde P_\beta(\sigma',\sigma)}\;=\;e^{\,4\beta J\,\mathrm{sgn}(k)} .
+\label{eq:flux}
+\end{equation}
+In particular $\tilde P_\beta$ is not reversible with respect to $\pi_{\beta,M}$ whenever some adjacent unlike pair has $\Hdel\ne0$.
+\end{proposition}
+\begin{proof}
+Here $\Hpair_{xy}(\sigma)=4J(k-1)$ and $\Hpair_{xy}(\sigma')=-4J(k+1)$, and $\pi(\sigma)/\pi(\sigma')=e^{4\beta Jk}$. For $k\ge1$ the forward acceptance is $e^{-4\beta J(k-1)}$ and the reverse acceptance is $1$, giving the ratio $e^{4\beta Jk}e^{-4\beta J(k-1)}=e^{4\beta J}$. For $k=0$ both acceptances are $1$ and the ratio is $1$. For $k\le-1$ the forward acceptance is $1$ and the reverse acceptance is $e^{4\beta J(k+1)}$, giving $e^{4\beta Jk}e^{-4\beta J(k+1)}=e^{-4\beta J}$.
+\end{proof}
+Reversibility and stationarity are different questions: a kernel that is not reversible with respect to $\pi_{\beta,M}$ may still leave it invariant. We therefore compute the stationary law of $\tilde P_\beta$ exactly where the state space is small enough (\cref{sec:results-exact}) and make no general claim. An energetically unfavourable adjacent exchange with $\Hdel=4J$ is accepted with probability $1$ instead of $e^{-4\beta J}$, and one with $\Hdel=4Jk$, $k\ge 1$, with probability $e^{-4\beta J(k-1)}$ instead of $e^{-4\beta Jk}$; for $\Hdel\le0$ the two rules agree.
+
+\begin{proposition}[One-step footprint]\label{prop:footprint}
+For $N\ge3$ and independent uniform $x,y\in\Lam$, $\Pr[x\sim y]=4/N^2$. Moreover, for every $\sigma$,
+\begin{equation}
+\big\|P_\beta(\sigma,\cdot)-\tilde P_\beta(\sigma,\cdot)\big\|_{\TV}\;\le\;\frac{4}{N^{2}}\big(1-e^{-4\beta J}\big).
+\label{eq:footprint}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Each site has four distinct neighbours, so $\Pr[x\sim y]=4/N^2$. The kernels differ only through adjacent unlike pairs, of which there are at most $|\mathcal E|=2N^2$, each proposed with probability $2/N^4$. For such a pair with $\Hdel=4Jk$, $k\ge1$, the acceptance probabilities are $e^{-4\beta Jk}$ and $e^{-4\beta J(k-1)}$, which differ by $e^{-4\beta J(k-1)}(1-e^{-4\beta J})\le 1-e^{-4\beta J}$; for $k\le0$ they coincide. All off-diagonal differences have the same sign and are compensated on the diagonal, so the total-variation distance equals the sum of their magnitudes, which is at most $2N^2\cdot(2/N^4)\cdot(1-e^{-4\beta J})$.
+\end{proof}
+\begin{remark}[Local versus stationary perturbation]
+\Cref{prop:footprint} bounds the \emph{one-step} perturbation of the random-pair kernel by a quantity of order $N^{-2}$ that vanishes as $T\to\infty$. It does \emph{not} give $\|\tilde\pi_N-\pi_N\|_{\TV}=O(N^{-2})$. How far a perturbed kernel moves the stationary law depends on the mixing of the unperturbed chain \citep{mitrophanov2005}, which deteriorates at low temperature, so the bias of equilibrium averages has to be measured (\cref{sec:results-impact}). For classical \emph{nearest-neighbour} exchange (propose $x$ and a uniformly chosen neighbour $y$) \emph{every} proposal is adjacent, the footprint is $O(1)$ rather than $O(N^{-2})$, and the correction in \eqref{eq:delta} is indispensable.
+\end{remark}

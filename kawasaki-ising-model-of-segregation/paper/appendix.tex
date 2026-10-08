@@ -1,0 +1,87 @@
+\appendix
+\section{Complete Exact-Chain Results}
+\label{app:exact}
+\begin{table}[h]
+\centering\small
+\caption{All exact stationary-law results (E2) at the four temperatures studied; columns as in \cref{tab:exact}. The correct kernel is at the solver precision in every row.}
+\label{tab:exact-full}
+\begin{tabular}{@{}cccc c cc cc@{}}
+\toprule
+ &  &  &  & correct & \multicolumn{2}{c}{uncorrected, pair} & \multicolumn{2}{c}{uncorrected, NN}\\
+\cmidrule(lr){5-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+torus & $M$ & $|\Omega|$ & $T$ & $d_{\TV}$ & $d_{\TV}$ & $\Delta\langle E\rangle$ & $d_{\TV}$ & $\Delta\langle E\rangle$\\
+\midrule
+\input{generated/tab_E2_full.tex}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Complete Variance-Peak Results}
+\label{app:demix}
+\begin{table}[h]
+\centering\footnotesize
+\caption{All cells of E5. $\Tb$: exact binodal; $\langle\hat T^V\rangle$ and s.d.: mean and standard deviation of the single-run estimator over $\EfiveR$ replicates; $z=(\langle\hat T^V\rangle-\Tb)/(\mathrm{s.d.}/\sqrt{R})$; $\bar T^V$ and CI: maximiser of the replicate-mean $\hat V$ and its $95\%$ bootstrap percentile interval ($4000$ resamples); ``in'': whether the interval contains $\Tb$; $\bar T^C$: maximiser of the replicate-mean specific heat. Grid step $\EfiveGridStep$.}
+\label{tab:demix}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}rcccccccccc@{}}
+\toprule
+$N$ & $f$ & $\Tb$ & $\langle\hat T^V\rangle$ & s.d. & $z$ & $\bar T^V$ & CI & in & $\bar T^C$\\
+\midrule
+\input{generated/tab_E5.tex}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Supporting Tables for the Sampler Checks}\label{app:sampler-tables}
+\begin{table}[t]
+\centering\small
+\caption{Empirical proposal statistics of the corrected sampler ($f=0.2$; $300$ burn-in and $300$ measured sweeps, single run each; E3). ``adjacent'' is the fraction of all proposals with $x\sim y$; ``adj.\ among unlike'' the fraction of unlike-spin proposals that are adjacent.}
+\label{tab:adj}
+\begin{tabular}{@{}rcccc c@{}}
+\toprule
+$N$ & $T$ & adjacent & $4/N^2$ & adj.\ among unlike & acceptance among unlike\\
+\midrule
+\input{generated/tab_E3_adjacency.tex}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{E4: mean energy per site under the corrected and uncorrected rules ($f=1/2$). $R$ replicates per rule; $z$ is the difference divided by its Welch standard error.}
+\label{tab:impact}
+\begin{tabular}{@{}rcrccccc@{}}
+\toprule
+$N$ & $T$ & $R$ & $\langle e\rangle_{\rm corr}$ & $\langle e\rangle_{\rm uncorr}$ & difference & s.e. & $z$\\
+\midrule
+\input{generated/tab_E4.tex}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{A Side Check: Translation Invariance of the Clustering Metric}\label{app:metric}
+The kernel $P_\beta$ and the law $\pi_{\beta,M}$ are invariant under translations of the torus, so a summary of the state should be too. This check is separate from the main argument; we include it because the software reports a clustering summary. The clustering summary used in the accompanying software is the mean pairwise distance of immigrants. With $d_{\Lam}(x,y)=\big(\sum_{i=1}^{2}\min\{|x_i-y_i|,N-|x_i-y_i|\}^2\big)^{1/2}$ the toroidal (minimum-image) metric and $\mathcal I(\sigma)=\{x:\sigma_x=+1\}$,
+\[
+D_{\mathrm{per}}(\sigma)=\binom{M}{2}^{-1}\!\!\!\sum_{\{x,y\}\subset\mathcal I(\sigma)}\!\!\! d_{\Lam}(x,y),
+\]
+while $D_{\mathrm{euc}}$ uses instead the Euclidean distance of the integer coordinates in $\{0,\dots,N-1\}^2$.
+\begin{proposition}[Translation invariance]\label{prop:metric}
+$D_{\mathrm{per}}(\theta_a\sigma)=D_{\mathrm{per}}(\sigma)$ for all $a\in\Lam$, whereas $D_{\mathrm{euc}}$ is not translation invariant: for $M=2$ with immigrants at $(0,0)$ and $(N-1,0)$ one has $D_{\mathrm{euc}}=N-1$, but after translating by $(1,0)$ one has $D_{\mathrm{euc}}=1$.
+\end{proposition}
+\begin{proof}
+$d_{\Lam}(x+a,y+a)=d_{\Lam}(x,y)$ because the minimum-image differences are unchanged; the counterexample is a direct computation.
+\end{proof}
+
+In E8 the periodic mean immigrant distance $D_{\mathrm{per}}$ of $25$ random translates of one equilibrated configuration ($N=100$, $f=0.2$, $T=1$, $3000$ sweeps) varies by $\EeightPerSpread$ (floating-point level; value $\EeightPer$). The non-periodic $D_{\mathrm{euc}}$ ranges from $\EeightNonMin$ to $\EeightNonMax$, a spread of $\EeightNonRel\%$ of its mean, although all $25$ configurations are the same physical state (\cref{prop:metric}). Values and trends of $D_{\mathrm{euc}}$ across runs or compositions therefore cannot be read as properties of the model.
+
+\section{Reproducibility}
+\label{app:repro}
+All experiments are scripts in \texttt{experiments/}; each writes its raw output to \texttt{results/paper/}, and \texttt{experiments/make\_paper\_assets.py} regenerates every figure and table of this paper (directory \texttt{paper/generated} and \texttt{paper/figures}). With Python $\ge3.10$, \texttt{numpy}, \texttt{scipy}, \texttt{matplotlib}, \texttt{numba} installed, the sequence is
+\begin{center}\small\ttfamily
+python experiments/exp\_exact\_local.py;\ python experiments/exp\_exact\_chain.py;\\
+python experiments/exp\_verify\_dynamics.py;\ python experiments/exp\_adjacency\_impact.py;\\
+python experiments/exp\_demixing.py;\ python experiments/exp\_single\_seed.py;\\
+python experiments/exp\_metric\_invariance.py;\ python experiments/exp\_equilibration.py;\\
+python experiments/exp\_equilibrium\_variance.py;\ python experiments/make\_paper\_assets.py
+\end{center}
+Wall-clock times on the two-core machine of \cref{sec:protocol}: E5 $\approx 22$ minutes, E9b $\approx$ 22 minutes, the remaining experiments a few minutes each. Seeds are derived by \texttt{SeedSequence} from the cell coordinates (\cref{sec:protocol}), so reruns on the same software versions reproduce the stored outputs.

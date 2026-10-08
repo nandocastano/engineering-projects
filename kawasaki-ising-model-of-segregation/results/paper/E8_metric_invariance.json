@@ -1,0 +1,14 @@
+{
+ "N": 100,
+ "f": 0.2,
+ "T": 1.0,
+ "sweeps": 3000,
+ "n_shifts": 25,
+ "periodic_min": 32.80758911603346,
+ "periodic_max": 32.807589116033625,
+ "periodic_spread": 1.6342482922482304e-13,
+ "nonperiodic_min": 38.50634996441026,
+ "nonperiodic_max": 65.12213983583652,
+ "nonperiodic_spread": 26.61578987142626,
+ "nonperiodic_rel_spread": 0.5612782312751856
+}
